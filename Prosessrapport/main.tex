@@ -1,0 +1,61 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfig}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\usepackage{fancyvrb}
+\usepackage{pstricks}
+\usepackage[pdftex]{hyperref}
+\usepackage{alltt}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{SIunits}
+\usepackage{subfig}
+\usepackage{supertabular}
+\usepackage{color}
+\usepackage{geometry}
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+\textsc{\LARGE EiT Ecomarathon 2011}\\[1.5cm]
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Prosjektrapport}\\[0.4cm]
+\HRule \\[1.5cm] 
+
+Fredrikstad, Stian\\
+Gudvangen, Hans\\
+Halse, Tore Egil\\
+Heimark, Erlend\\
+Helvig, Torgeir\\
+
+\vfill
+ 
+% Bottom of the page
+{\large \today}
+
+\end{center}
+\end{titlepage}
+%-----Innhold--------------------
+\cleardoublepage
+\pagenumbering{Roman}
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+%---------------------------------
+\pagenumbering{arabic}
+\chapter{Gruppens medlemmer}
+\input{Stian}
+\input{toreegil}
+\chapter{Gruppens samspill}
+\input{gruppenssamspill}
+\input{ledelse}
+
+\end{document}
