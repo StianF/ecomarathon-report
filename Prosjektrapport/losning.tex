@@ -1,13 +1,17 @@
-\section{Løsning GUI}
-\subsection{Hente data fra bilen}
+\section{Dataflyt fra bilen til brukergrensesnitt}
 Hele løsningen rundt å få data fra bilens telemetrimodul til brukeren er realisert med 3 modulerer som gjør hver sin jobb for å frakte dataene.
-\subsubsection{Pythonserver}
+\begin{figure}[H]
+\caption{Dataflyt} 
+\label{dataflow}
+\includegraphics[width=\textwidth, trim=0 550 0 75]{images/dataflow.pdf}
+\end{figure}
+\subsection{Pythonserver}
 Pythonserver er et lite script skrevet i Python som setter opp en TCP socket for å motta data som telemetrimodulen sender. Så fort den har mottatt en hel pakke med data fra bilens telemetrimodul gjør den en omregning av gpsposisjonene fra grader og minutter til rene grader på decimalformat. Deretter sender den dette videre ved å sette opp en HTTP connection til webserveren og sender dataene som et POST request til setdata.php.
-\subsubsection{setdata.php}
+\subsection{setdata.php}
 Denne modulen tar i mot kommaseparerte data fra Pythonserveren og setter disse inn i databasen. I tillegg gjør den utregninger i forhold til om bilen har passert kontrollpunkt og oppdaterer tidstabellen i henhold til dette.
-\subsubsection{getdata.php}
+\subsection{getdata.php}
 Denne brukes for å hente data fra databasen når websiden vises. Den slår opp i databasen og bygger opp jquery som igjen oppdaterer elementer i guiet.
-\subsection{Brukergrensesnitt}
+\section{Brukergrensesnitt}
 Brukergrensesnittet er bygget ut hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jquery. Det kjører en jqueryfunksjon som hver x. minutt som henter verdiene som getdata.php genererer og oppdaterer elementene i brukergrensesnittet med det. Brukergrensesnittet har også et kart som bruker api fra google for å sette logoen til fuelfighter på kartet og få den til å bevege seg utifra data fra bilen. En oversikt over hvordan det ferdige systemet ser ut kan sees in en skjermdumpen \ref{gui}.
 \begin{figure}[H]
 \caption{Ferdig system} 
@@ -30,5 +34,6 @@ Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{stats} opp, 
 \label{stats}
 \includegraphics[width=200px]{images/stat.png}
 \end{figure}
-
-
+\section{Telemetrimodul}
+Telemtrimodulen ble laget av Anders Guldahl \cite{telemetrithesis} i 2009. Denne har ikke blitt endret mye på, men noen endringer måtte gjøres for at den skulle fungere sammen med brukergrensesnittet.
+Slik det var, så leverte telemetrimodulen GPS data kun til dashbordet i bilen og hastigheten til bilen ble aldri brukt. Dette er nå endret slik at telemetrimodulen sender disse dataene sammen med de andre måleverdiene som en komma separert string via GPRS til Pythonserveren.
