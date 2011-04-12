@@ -5,14 +5,22 @@ Hele løsningen rundt å få data fra bilens telemetrimodul til brukeren er real
 \label{dataflow}
 \includegraphics[width=\textwidth, trim=0 550 0 75]{images/dataflow.pdf}
 \end{figure}
+\subsection{Databasen}
+Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i \ref{er}, her er config spesiell, dette er en tabell som bare har en rad fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
+\begin{figure}[H]
+\caption{Databasen} 
+\label{er}
+\includegraphics[width=\textwidth]{images/er.png}
+\end{figure}
+
 \subsection{Pythonserver}
 Pythonserver er et lite script skrevet i Python som setter opp en TCP socket for å motta data som telemetrimodulen sender. Så fort den har mottatt en hel pakke med data fra bilens telemetrimodul gjør den en omregning av gpsposisjonene fra grader og minutter til rene grader på decimalformat. Deretter sender den dette videre ved å sette opp en HTTP connection til webserveren og sender dataene som et POST request til setdata.php.
 \subsection{setdata.php}
 Denne modulen tar i mot kommaseparerte data fra Pythonserveren og setter disse inn i databasen. I tillegg gjør den utregninger i forhold til om bilen har passert kontrollpunkt og oppdaterer tidstabellen i henhold til dette.
 \subsection{getdata.php}
-Denne brukes for å hente data fra databasen når websiden vises. Den slår opp i databasen og bygger opp jquery som igjen oppdaterer elementer i guiet.
+Denne brukes for å hente data fra databasen når websiden vises. Den slår opp i databasen og bygger opp et script med jQuery\cite{jquery} som igjen oppdaterer elementer i guiet.
 \section{Brukergrensesnitt}
-Brukergrensesnittet er bygget ut hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jquery. Det kjører en jqueryfunksjon som hver x. minutt som henter verdiene som getdata.php genererer og oppdaterer elementene i brukergrensesnittet med det. Brukergrensesnittet har også et kart som bruker api fra google for å sette logoen til fuelfighter på kartet og få den til å bevege seg utifra data fra bilen. En oversikt over hvordan det ferdige systemet ser ut kan sees in en skjermdumpen \ref{gui}.
+Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon som hver x. minutt henter et nytt script som getdata.php genererer og oppdaterer elementene i brukergrensesnittet med det. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees in en skjermdumpen \ref{gui}.
 \begin{figure}[H]
 \caption{Ferdig system} 
 \label{gui}
@@ -28,7 +36,7 @@ En skjermdump av dette finnes i \ref{config}, dette kommer opp som et vindu over
 \end{figure}
 
 \subsubsection{Statistikk}
-Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{stats} opp, dette genereres ut i fra det som blir lagt inn av setdata.php. Her kan man navigere frem og tilbake i historien for å finne ut når en sensor har meldt om feil.
+Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{stats} opp, dette genereres ut i fra det som blir lagt inn av databasen. Her kan man navigere frem og tilbake i historien for å finne ut når en sensor har meldt om feil. Grafen tegnes opp ved hjelp av biblioteket highcharts \cite{highcharts}.
 \begin{figure}[H]
 \caption{Statistikk} 
 \label{stats}
