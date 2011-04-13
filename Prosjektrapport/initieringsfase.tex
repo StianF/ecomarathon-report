@@ -1,40 +1,41 @@
 \section{Konsepter}
-Etter at det hadde blitt fastlagt hva gruppa skulle gjøre, måtte vi gjøre en
-brainstorm rundt hvordan resultatet skulle se ut. Vi fulgte stepladder-metoden,
-litt ulike ideer dukket opp.
+Etter at det ble klart hva gruppa skulle gjøre, gjennomførte vi en brainstorm om hvordan brukergrensesnittet skulle se ut.
+Alle på gruppa forsøkte å tegne konsepter på grensesnittet, og her er noen av ideene som ble brukt i konseptene:
 
-Erlend:
-Noe ala. eksisterende??
+\paragraph{Kart}
+Oppgaven går ut på å vise data fra telemetrimodulen på bilen, og siden denne er utstyrt men en gps, er det en mulighet å vise posisjonen til bilen på et kart.
 
-Hans:
-Tegnet opp et ganske komplett skjermbilde med tid, hastighet, posisjon på banen
-og trendkurver for måledata. Kjøredata og tekniske data var tydelig separert.
-Bruk av farger for å indikere betydning av verdier var også spesifisert.
+\paragraph{Riktig fart}
+Ideen var et speedometer som ikke viste hastiget, men hastighet relativt til optimal hastighet. 
+Siden bilen bruker mindre energi ved lavere hastighet, ønsker man å holde en så lav hastighet som mulig, men fullføre løpet innen gitt tid.
+Et slikt speedometer vil da vise hvor mye man bør øke eller senke hastigheten for å komme i mål akkurat tidsnok.
 
-Stian:
-%??
+\paragraph{Tid og splittid}
+Konseptet bestod av en tabell med rundetider og splittider.
+Splittidene listes opp horisontalt for hver runde, og rundene listes opp vertikalt.
+Tidene skal kunne vises enten som brukt tid, eller differansen mellom planlagt og brukt tid.
+Dette gjør det lett å sammenligne de ulike rundene, og planlegge ulike hastigheter for disse.
 
-Tore Egil:
-Fokuserte på tid. Tegnet opp et system for å vise tider, splittider, og disse
-tidene sammenlignet med idealtiden.
+\paragraph{Trending av måledata}
+Siden måledata hele tiden endrer seg, vil det være interessant å se hvordan dataene har endret seg over tid.
 
-Torgeir:
-Hadde fokusert på fart. Konseptet var et speedometer som viste "riktig fart", 
-den hastigheten man bør holde for å komme i mål til riktig tid, og hva man
-holder relativt til denne. I tillegg var måledata gjemt ut til sidene, og
-ville dukke opp kun når det var data av betydning der.
+\paragraph{Bruk av farger}
+Å benytte farger til måledata vil kunne gjøre det enklere for en bruker å vite betydningen av en måleverdi.
 
+\paragraph{Skjuling av måleverdier}
+Siden måledata er mest interessante når de ikke er innen normale verdier, kan disse skjules når de normale.
+Dette vil gi brukeren mindre data å holde orden på.
 
 \section{Vurdering}
-For å vurdere disse konseptene valgte vi å ta et møte med ecomarathon teamet,
-siden vi manglet grunnlag for å sette opp en vurderingsmatrise. Vi snakket
-først med Jardar, og tegningen til Hans falt i god smak. Det ble klart at tid
-var langt mer viktig enn fart, så hovedskjermbildet ble det avgjort skulle først
-og fremst inneholde rundetider og et kart over banen. Hans sin idè om å trende
-tekniske data ble kombinert med Torgeir sin ide om å holde disse skjult. 
-Tore Egil sin idè om å vise splittider ble etter hvert avvist av Uwe, som mente
-disse ville bli vanskelige å implementere, siden man ikke har nøyaktige
-avstander på banen.
+For å vurdere disse konseptene valgte vi å ta et møte med ecomarathon teamet, siden vi manglet grunnlag for å sette opp en vurderingsmatrise. 
+Vi snakket først med Jardar, og tegningen til Hans (Figur \ref{gui-concept}) falt i god smak. 
+Det ble klart at tid var langt mer viktig enn fart, så hovedskjermbildet ble det avgjort skulle først og fremst inneholde rundetider og et kart over banen. 
+Trending av data ble det klart burde kombineres med å holde disse skjult når disse ikke var interessante.
+Ideen om å vise splittider ble etter hvert avvist av Uwe, som mente disse ville bli vanskelige å implementere. 
+Et av problemene er at man ikke har nøyaktige avstander på banen, men også at man er nødt til å stoppe en gang for hver runde.
 
-%Owe kom etter hvert inn og deltok med sine sterke, men diffuse meninger :P
-% "Then maybe..."
+\begin{figure}[H]
+\caption{GUI-konsept} 
+\label{gui-concept}
+\includegraphics[width=\textwidth]{images/gui_concept_hans.pdf}
+\end{figure}
