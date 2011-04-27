@@ -1,0 +1,20 @@
+\subsection{Krav fra kunde}
+\begin{tabular}{|r|l|l|l|l|} 
+    \hline 
+        Funksjonalitet  & Vise real-time posisjon til bilen & x &   & \\ \cline{2-5} 
+                & Vise real-time fart på bilen &  & x  & \\ \cline{2-5} 
+                & Vise real-time måleverdier fra sensorer i bilen & x &   & \\ \cline{2-5} 
+                & Klokke som viser tid brukt under løpet   &  x &  & \\ \cline{2-5} 
+                & Kommunikasjonmuligheter &  &   & x \\ \cline{2-5} 
+         \end{tabular}
+\begin{itemize}
+\item Vise real-time posisjon til bilen \\
+Siden telemetrimodulen sender gps-data er det mulig  å vise posisjonen til bilen. Dette gjøres da ved å displaye et kart i GUI-et som viser hvor bilen befinner seg.
+\item Vise real-time fart på bilen \\
+Ha et speedometer i GUI-et som viser hastigheten til bilen. Eventuelt et speedometer som viser hastighet relativt til optimal hastighet. Siden bilen bruker mindre energi ved lavere hastighet, ønsker man å holde en så lav hastighet som mulig, men fullføre løpet innen gitt tid. Et slikt speedometer vil da vise hvor mye man bør øke eller senke hastigheten for å komme i mål akkurat tidsnok.
+\item  Vise real-time måleverdier fra sensorer i bilen \\
+Vise måleverdier fra de forskjellige sensorene i bilen. Disse verdiene blir sendt fra telemetrimodulen, og viser verdier for trykk, temperatur og celle-spenning. Det er også ønskelig at systemet gir beskjed når verdiene overskrider visse grenseverdier. 
+\item Klokke som viser tid brukt under løpet \\
+Vise tid brukt under løpet. Skal i tillegg vise rundetider og splittider. Disse verdiene skal brukes i forhold til de planlagte rundetidene, og da vise differansen mellom planlagt tid og faktisk brukt tid. 
+\item Kommunikasjonsmuligheter \\
+\end{itemize}
