@@ -1,11 +1,11 @@
-\section{Dataflyt fra bilen til brukergrensesnitt}
+\subsection{Dataflyt fra bilen til brukergrensesnitt}
 Hele løsningen rundt å få data fra bilens telemetrimodul til brukeren er realisert med 3 modulerer som gjør hver sin jobb for å frakte dataene.
 \begin{figure}[H]
 \caption{Dataflyt} 
 \label{dataflow}
 \includegraphics[width=\textwidth, trim=0 550 0 75]{images/dataflow.pdf}
 \end{figure}
-\subsection{Databasen}
+\subsubsection{Databasen}
 Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i \ref{er}, her er config spesiell, dette er en tabell som bare har en rad fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
 \begin{figure}[H]
 \caption{Databasen} 
@@ -13,13 +13,13 @@ Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk
 \includegraphics[width=\textwidth]{images/er.png}
 \end{figure}
 
-\subsection{Pythonserver}
+\subsubsection{Pythonserver}
 Pythonserver er et lite script skrevet i Python som setter opp en TCP socket for å motta data som telemetrimodulen sender. Så fort den har mottatt en hel pakke med data fra bilens telemetrimodul gjør den en omregning av gpsposisjonene fra grader og minutter til rene grader på decimalformat. Deretter sender den dette videre ved å sette opp en HTTP connection til webserveren og sender dataene som et POST request til setdata.php.
-\subsection{setdata.php}
+\subsubsection{setdata.php}
 Denne modulen tar i mot kommaseparerte data fra Pythonserveren og setter disse inn i databasen. I tillegg gjør den utregninger i forhold til om bilen har passert kontrollpunkt og oppdaterer tidstabellen i henhold til dette hvis løpet er startet fra brukergrensesnittet.
-\subsection{getdata.php}
+\subsubsection{getdata.php}
 Denne brukes for å hente data fra databasen når websiden vises. Den slår opp i databasen og bygger opp et script med jQuery\cite{jquery} som igjen oppdaterer elementer i guiet.
-\section{Brukergrensesnitt}
+\subsection{Brukergrensesnitt}
 Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon som hver x. minutt henter et nytt script som getdata.php genererer og oppdaterer elementene i brukergrensesnittet med det. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees in en skjermdumpen \ref{gui}. Stoppeklokken som sees på toppen her drives av et lite javascript. Ved å klikke på Start så settes et tidspunkt i databasen og klokka begynner å gå, dette tidspunktet brukes så av setdata.php for å regne ut rundetider på banen. Hvis det trykkes på Stop så stoppes klokka slik at brukeren kan stoppe løpet ved uforutsette hendelser i løpet.
 \begin{figure}[H]
 \caption{Ferdig system} 
@@ -42,6 +42,6 @@ Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{stats} opp, 
 \label{stats}
 \includegraphics[width=200px]{images/stat.png}
 \end{figure}
-\section{Telemetrimodul}
+\subsection{Telemetrimodul}
 Telemtrimodulen ble laget av Anders Guldahl \cite{telemetrithesis} i 2009. Denne har ikke blitt endret mye på, men noen endringer måtte gjøres for at den skulle fungere sammen med brukergrensesnittet.
 Slik det var, så leverte telemetrimodulen GPS data kun til dashbordet i bilen og hastigheten til bilen ble aldri brukt. Dette er nå endret slik at telemetrimodulen sender disse dataene sammen med de andre måleverdiene som en komma separert string via GPRS til Pythonserveren.
