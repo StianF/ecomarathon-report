@@ -1,16 +1,16 @@
 \subsection{Dataflyt fra bilen til brukergrensesnitt}
 Hele løsningen rundt å få data fra bilens telemetrimodul til brukeren er realisert med 3 modulerer som gjør hver sin jobb for å frakte dataene.
 \begin{figure}[H]
-\caption{Dataflyt} 
 \label{dataflow}
 \includegraphics[width=\textwidth, trim=0 550 0 75]{images/dataflow.pdf}
+\caption{Dataflyt} 
 \end{figure}
 \subsubsection{Databasen}
 Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i \ref{er}, her er config spesiell, dette er en tabell som bare har en rad fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
 \begin{figure}[H]
-\caption{Databasen} 
 \label{er}
 \includegraphics[width=\textwidth]{images/er.png}
+\caption{Databasen} 
 \end{figure}
 
 \subsubsection{Pythonserver}
@@ -22,25 +22,25 @@ Denne brukes for å hente data fra databasen når websiden vises. Den slår opp 
 \subsection{Brukergrensesnitt}
 Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon som hver x. minutt henter et nytt script som getdata.php genererer og oppdaterer elementene i brukergrensesnittet med det. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees in en skjermdumpen \ref{gui}. Stoppeklokken som sees på toppen her drives av et lite javascript. Ved å klikke på Start så settes et tidspunkt i databasen og klokka begynner å gå, dette tidspunktet brukes så av setdata.php for å regne ut rundetider på banen. Hvis det trykkes på Stop så stoppes klokka slik at brukeren kan stoppe løpet ved uforutsette hendelser i løpet.
 \begin{figure}[H]
-\caption{Ferdig system} 
 \label{gui}
 \includegraphics[width=\textwidth]{images/gui.png}
+\caption{Ferdig system} 
 \end{figure}
 \subsubsection{Konfigurasjon}
 Det finnes også et brukergrensesnitt for at brukeren av systemet skal kunne sette navn, måleenhet og grenseverdi på sensorer. I tillegg kan også planlagte tider og hvor dataene skal hentes fra settes her.
 En skjermdump av dette finnes i \ref{config}, dette kommer opp som et vindu over grensesnittet i \ref{gui}.
 \begin{figure}[H]
-\caption{Config} 
 \label{config}
 \includegraphics[width=200px]{images/config.png}
+\caption{Config} 
 \end{figure}
 
 \subsubsection{Statistikk}
 Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{stats} opp, dette genereres ut i fra det som blir lagt inn av databasen. Her kan man navigere frem og tilbake i historien for å finne ut når en sensor har meldt om feil. Grafen tegnes opp ved hjelp av biblioteket highcharts \cite{highcharts}.
 \begin{figure}[H]
-\caption{Statistikk} 
 \label{stats}
 \includegraphics[width=200px]{images/stat.png}
+\caption{Statistikk} 
 \end{figure}
 \subsection{Telemetrimodul}
 Telemtrimodulen ble laget av Anders Guldahl \cite{telemetrithesis} i 2009. Denne har ikke blitt endret mye på, men noen endringer måtte gjøres for at den skulle fungere sammen med brukergrensesnittet.
