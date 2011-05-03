@@ -2,18 +2,18 @@ Alle delsystemene har blitt enhetstestet og integrasjonstestet for å forsikre a
 \subsection{Enhetstester}
 \paragraph{Telemetrimodul}
 Telemetrimodulen kan lagre all informasjon som sendes til serveren på et minnekort slik at man ikke er avhengig av andre systemer.
-Med dette ble telemtrimodulen kjørt rundt i en vanlig bil og sjekket for at posisjon og hastighet stemte overrens med virkligheten.
+Med dette ble telemtrimodulen kjørt rundt i en vanlig bil og sjekket for at posisjon og hastighet stemte overens med virkligheten.
 \paragraph{Python server}
 Python serveren har blitt testet ved å lage et klient tilsvarende telemetrimodulen som sender data på samme format.
-Denne klienten har så blitt konfiguerert til å oppføre seg på forskjellige måter som gjør at serveren skal slutte å fungere, men alle sabotasjeforsøk har vært misslykket.
+Denne klienten har så blitt konfiguerert til å oppføre seg på forskjellige måter som gjør at serveren skal slutte å fungere, men alle sabotasjeforsøk har vært mislykket.
 \paragraph{setdata.php}
 Får å teste setdata.php ble det laget en enkel webside som sendte data via et POST-request til setdata.php, og det viste seg da, at så lenge den får data på riktig format klarer den å parse alt og legge det til i databasen.
-Funksjonaliteten som finner ut om bilen har kommet i mål eller ikke ble også testet ved å lagre mange punkter rundt på banen i Tyskland, og deretter traversere disse, dette fungerte også som det skulle.
+Funksjonaliteten som finner ut om bilen har kommet i mål eller ikke ble også testet ved å lagre mange punkter rundt på banen i Tyskland, og deretter traversere disse. Dette fungerte også som det skulle.
 \paragraph{getdata.php}
 Dette er kun et enkelt databaseoppslag og har derfor kun blitt testet ved å åpne siden for å se at alle data som vises er i samsvar med sist innlagte data i databasen.
 \paragraph{Brukergrensesnittet}
 Brukergrensesnittet bygger på allerede testede moduler, og har i tillegg blitt testet i sin helhet. Det er verifisert at alt fungerer i nettleserne: Mozilla Firefox 3.8+ og Google Chrome 11+. Siden fungerer sannsynligvis også i tidligere versjoner, men dette er dessverre ikke blitt testet enda.
 
 \subsection{Integrasjonstester}
-Hele systemet har blitt testet på samme måte som Telemtrimodulen ble enhetstestet. Telemetrimodulen ble kjørt rundt, og ved hjelp av en mobiltelefon med nettleser ble posisjonen og hastighet i brukergrensesnittet sjekket mot faktiske data i bilen.
+Hele systemet har blitt testet på samme måte som Telemetrimodulen ble enhetstestet. Telemetrimodulen ble kjørt rundt, og ved hjelp av en mobiltelefon med nettleser ble posisjonen og hastighet i brukergrensesnittet sjekket mot faktiske data i bilen.
 Foruten noen sekunders forsinkelse fra telemetrimodulen til nettsiden fungerte alt som det skulle. Det eneste som står igjen er testen av kommunikasjon fra telemetrimodulen til server når telemetrimodulen befinner seg i et annet land, men dette skal fungere på lik linje med at telemetrimodulen er i Norge, så lenge et simkort godkjent av telefonoperatøren i Tyskland blir brukt.
