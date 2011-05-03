@@ -1,6 +1,6 @@
 \section{Styrkeberegning}
 \subsection{Hjulbrakett}
-Dette gjøres i UGS NX Nastran 7.5, Advanced Simulation. Kraften F2 = 1720 N fordeles likt over de to hullene i hjulbraketten. Hjulbraketten settes som fast låst på undersiden.
+Dette gjøres i UGS NX Nastran 7.5, Advanced Simulation. Kraften $F_{2}$ = 1720 N fordeles likt over de to hullene i hjulbraketten. Hjulbraketten settes som fast låst på undersiden.
 
 \begin{figure}[H]
 \begin{center}$
@@ -12,7 +12,7 @@ Dette gjøres i UGS NX Nastran 7.5, Advanced Simulation. Kraften F2 = 1720 N for
 \caption{Krefter og grensebetingelser hjulbrakett}
 \end{figure}
 
-Kjører simuleringen og får største spenning $\sigma_{max}$=105 MPa. Ser at denne vil oppstå i opplagerhullet til hjulets aksel, på den siden hvor skruehodet er forsenket.
+Simuleringen gir største spenning $\sigma_{max}$=105 MPa. Ser at denne vil oppstå i opplagerhullet til hjulets aksel, på den siden hvor skruehodet er forsenket.
 
 \begin{figure}[H]
 \begin{center}$
@@ -38,7 +38,7 @@ Hjulbraketten vil ha en sikkerhet mot at det oppstår flyt i materialet på 2.14
 
 \subsection{Rammebrakett}
 
-Setter på randbetingelser og krefter som vist nedenfor. Kraften F1=1230 N fordeles likt over de to hullene på toppen. Rammebraketten settes som fast låst på undersiden.
+Setter på randbetingelser og krefter som vist nedenfor. Kraften $F_{1}$=1230 N fordeles likt over de to hullene på toppen. Rammebraketten settes som fast låst på undersiden.
 
 \begin{figure}[H]
 \begin{center}$
@@ -50,7 +50,7 @@ Setter på randbetingelser og krefter som vist nedenfor. Kraften F1=1230 N forde
 \caption{Krefter og grensebetingelser rammebrakett}
 \end{figure}
 
-Kjører simuleringen og får største spenning $\sigma_{max}$=31 MPa. Denne oppstår inne i hullene hvor hjulet på toppen er opplagret.
+Simuleringen gir største spenning $\sigma_{max}$=31 MPa. Denne oppstår inne i hullene hvor hjulet på toppen er opplagret.
 
 \begin{figure}[H]
 \begin{center}$
@@ -68,10 +68,12 @@ Beregnet sikkerhet mot at det oppstår flyt i materialet:
 \eta=\frac{225 MPa}{31 MPa}=7.25
 \end{equation}\\
 
-Rammebraketten vil ha en sikkerhet mot at det oppstår flyt i materialet på 7.25.\newpage
+Modellen er modellert som en solid, der sveisene er simulert med chamfers og har a-mål 5 mm.\newline
+Rammebraketten vil ha en sikkerhet mot at det oppstår flyt i materialet på 7.25.
+
 
 \subsection{Bein og Beinbrakett}
-Setter på randbetingelser og krefter som vist nedenfor. I beinbrakettens hull påføres det en kraft tilsvarende bilens og rammens vekt i dette opplageret, F5=250N. Beinene må også sørge for å holde rammen stabil sideveis, samt framover og bakover. For å simulere dette påføres det krefter på F6=F7=100N nederst på beinet i x- og y-retning. Beinbraketten settes som fast låst på baksiden.
+Setter på randbetingelser og krefter som vist nedenfor. I beinbrakettens hull påføres det en kraft tilsvarende bilens og rammens vekt i dette opplageret, $F_{5}$=250N. Beinene må også sørge for å holde rammen stabil sideveis, samt framover og bakover. For å simulere dette påføres det krefter på $F_{6}$=$F_{7}$=100N nederst på beinet i x- og y-retning. Beinbraketten settes som fast låst på baksiden.
 
 \begin{figure}[H]
 \begin{center}$
@@ -83,7 +85,7 @@ Setter på randbetingelser og krefter som vist nedenfor. I beinbrakettens hull p
 \caption{Krefter og grensebetingelser bein og beinbrakett}
 \end{figure}
 
-Kjører simuleringen og får største spenning $\sigma_{max}$=85 MPa. Denne oppstår nederst på innfestningen mellom beinbraketten og beinet.
+Simuleringen gir største spenning $\sigma_{max}$=85 MPa. Denne oppstår nederst på innfestingen mellom beinbraketten og beinet.
 
 \begin{figure}[H]
 \begin{center}$
@@ -101,4 +103,5 @@ Beregnet sikkerhet mot at det oppstår flyt i materialet:
 \eta=\frac{225 MPa}{85 MPa}=2.65
 \end{equation}\\
 
+Modellen er modellert som en solid, der sveisene er simulert med chamfers og har a-mål 20 mm.\newline
 Beinet og beinbraketten vil ha en sikkerhet mot at det oppstår flyt i materialet på 2.65.
