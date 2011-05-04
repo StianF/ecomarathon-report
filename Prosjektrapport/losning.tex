@@ -1,6 +1,6 @@
 \label{sec:losning}
 \subsection{Dataflyt fra bilen til brukergrensesnitt}
-Hele løsningen rundt å få data fra bilens telemetrimodul til brukergrensesnittet er realisert med noen enkle modulerer som gjør hver sin jobb for å frakte dataene. Dataflyten mellom de forskjellige modulene er visualisert i \ref{fig:dataflow}.
+Hele løsningen rundt å få data fra bilens telemetrimodul til brukergrensesnittet er realisert med noen enkle modulerer som gjør hver sin jobb for å frakte dataene. Dataflyten mellom de forskjellige modulene er visualisert i figur \ref{fig:dataflow}.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth, trim=0 540 0 75]{images/dataflow.pdf}
@@ -9,7 +9,7 @@ Hele løsningen rundt å få data fra bilens telemetrimodul til brukergrensesnit
 \end{figure}
 
 \paragraph{Databasen}
-Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i \ref{fig:er}. Tabellen config er egentlig bare en enkelt rad, fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
+Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i figur \ref{fig:er}. Tabellen config er egentlig bare en enkelt rad, fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{images/er.png}
@@ -24,7 +24,7 @@ Denne modulen tar imot kommaseparerte data fra Pythonserveren og setter disse in
 \paragraph{getdata.php}
 Denne brukes for å hente data fra databasen når websiden vises. Den slår opp i databasen og bygger opp et script med jQuery\cite{jquery} som igjen oppdaterer elementer i guiet.
 \subsection{Brukergrensesnitt}
-Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon, som hver x. minutt henter et nytt script som getdata.php genererer, og deretter oppdaterer elementene i brukergrensesnittet. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet, og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees i skjermdumpen \ref{fig:gui}. Stoppeklokken som sees på toppen her drives av et lite javascript. Ved å klikke på {\em Start} settes et tidspunkt i databasen og klokka begynner å gå, dette tidspunktet brukes så av setdata.php for å regne ut rundetider på banen. Hvis det trykkes på {\em Stop} så stoppes klokka slik at brukeren kan stoppe løpet ved uforutsette hendelser. {\em Reset} vil så fjerne tidene fra tidstabellen og sette klokka tilbake til 00:00:00.
+Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon, som hver x. minutt henter et nytt script som getdata.php genererer, og deretter oppdaterer elementene i brukergrensesnittet. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet, og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees i figur \ref{fig:gui}. Stoppeklokken som sees på toppen her drives av et lite javascript. Ved å klikke på {\em Start} settes et tidspunkt i databasen og klokka begynner å gå, dette tidspunktet brukes så av setdata.php for å regne ut rundetider på banen. Hvis det trykkes på {\em Stop} så stoppes klokka slik at brukeren kan stoppe løpet ved uforutsette hendelser. {\em Reset} vil så fjerne tidene fra tidstabellen og sette klokka tilbake til 00:00:00.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{images/gui.png}
@@ -34,7 +34,7 @@ Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet
 
 \paragraph{Konfigurasjon}
 Det finnes også et brukergrensesnitt for at brukeren av systemet skal kunne sette navn, måleenhet og grenseverdi på sensorer. I tillegg kan også planlagte tider og hvor dataene skal hentes fra settes her.
-En skjermdump av dette finnes i \ref{fig:config}, dette kommer opp som et vindu over grensesnittet i \ref{fig:gui}.
+En skjermdump av dette finnes i figur \ref{fig:config}, dette kommer opp som et vindu over grensesnittet i figur \ref{fig:gui}.
 
 \begin{figure}[H]
 \includegraphics[width=200px]{images/config.png}
@@ -43,7 +43,7 @@ En skjermdump av dette finnes i \ref{fig:config}, dette kommer opp som et vindu 
 \end{figure}
 
 \paragraph{Statistikk}
-Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{fig:stats} opp, dette genereres ut i fra det som blir lagt inn av databasen. Her kan man navigere frem og tilbake i historien for å finne ut når en sensor har meldt om feil. Grafen tegnes opp ved hjelp av biblioteket highcharts \cite{highcharts}.
+Hver sensor kan trykkes på og da kommer vinduet som er vist i figur \ref{fig:stats} opp, dette genereres ut i fra det som blir lagt inn av databasen. Her kan man navigere frem og tilbake i historien for å finne ut når en sensor har meldt om feil. Grafen tegnes opp ved hjelp av biblioteket highcharts \cite{highcharts}.
 
 \begin{figure}[H]
 \includegraphics[width=200px]{images/stat.png}
