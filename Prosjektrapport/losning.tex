@@ -9,7 +9,7 @@ Hele løsningen rundt å få data fra bilens telemetrimodul til brukergrensesnit
 \end{figure}
 
 \paragraph{Databasen}
-Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i \ref{fig:er}. Tabellen config er egentlig bare en enkelt rad rad fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
+Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk på sensorer, tider og andre data som må være persistente. Et ER diagram over databasen kan sees i \ref{fig:er}. Tabellen config er egentlig bare en enkelt rad, fordi den skal holde globale variable for hvorvidt løpet er startet og hvor de andre dataene kan hentes fra.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{images/er.png}
@@ -18,13 +18,13 @@ Databasen som kjører bak alt er en enkel MySQL-database, denne holder historikk
 \end{figure}
 
 \paragraph{Pythonserver}
-Pythonserver er et lite script skrevet i Python som setter opp en TCP socket for å motta data som telemetrimodulen sender. Så fort den har mottatt en hel pakke med data fra bilens telemetrimodul gjør den en omregning av gpsposisjonene fra grader og minutter til rene grader på decimalformat. Deretter sender den dette videre ved å sette opp en HTTP connection til webserveren og sender dataene som et POST request til setdata.php.
+Pythonserver er et lite script skrevet i Python som setter opp en TCP socket for å motta data som telemetrimodulen sender. Så fort den har mottatt en hel pakke med data fra bilens telemetrimodul gjør den en omregning av gpsposisjonene fra grader og minutter til rene grader på decimalformat. Deretter sender den dette videre ved å sette opp en HTTP connection til webserveren, og sender dataene som et POST request til setdata.php.
 \paragraph{setdata.php}
 Denne modulen tar imot kommaseparerte data fra Pythonserveren og setter disse inn i databasen. I tillegg gjør den utregninger i forhold til om bilen har passert kontrollpunkt og oppdaterer tidstabellen i henhold til dette hvis løpet er startet fra brukergrensesnittet.
 \paragraph{getdata.php}
 Denne brukes for å hente data fra databasen når websiden vises. Den slår opp i databasen og bygger opp et script med jQuery\cite{jquery} som igjen oppdaterer elementer i guiet.
 \subsection{Brukergrensesnitt}
-Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon som hver x. minutt henter et nytt script som getdata.php genererer og oppdaterer elementene i brukergrensesnittet med det. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees in en skjermdumpen \ref{fig:gui}. Stoppeklokken som sees på toppen her drives av et lite javascript. Ved å klikke på Start så settes et tidspunkt i databasen og klokka begynner å gå, dette tidspunktet brukes så av setdata.php for å regne ut rundetider på banen. Hvis det trykkes på Stop så stoppes klokka slik at brukeren kan stoppe løpet ved uforutsette hendelser.
+Brukergrensesnittet er bygget uten hjelp av noe spesielt rammeverk, men i stedet bygget fra grunnen ved hjelp av PHP, javascript og jQuery\cite{jquery}. Det kjører en jqueryfunksjon, som hver x. minutt henter et nytt script som getdata.php genererer, og deretter oppdaterer elementene i brukergrensesnittet. Brukergrensesnittet har et kart som bruker api fra google for å sette logoen til fuelfighter på kartet, og få den til å bevege seg utifra data fra bilen. Hastigheten til bilen blir gjengitt ved hjelp av et speedometer fra Bindows Gauges\cite{bindows}. En oversikt over hvordan det ferdige systemet ser ut kan sees i skjermdumpen \ref{fig:gui}. Stoppeklokken som sees på toppen her drives av et lite javascript. Ved å klikke på {\em Start} settes et tidspunkt i databasen og klokka begynner å gå, dette tidspunktet brukes så av setdata.php for å regne ut rundetider på banen. Hvis det trykkes på {\em Stop} så stoppes klokka slik at brukeren kan stoppe løpet ved uforutsette hendelser. {\em Reset} vil så fjerne tidene fra tidstabellen og sette klokka tilbake til 00:00:00.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{images/gui.png}
@@ -52,5 +52,5 @@ Hver sensor kan trykkes på og da kommer vinduet som er vist i \ref{fig:stats} o
 \end{figure}
 
 \subsection{Telemetrimodul}
-Telemetrimodulen ble laget av Anders Guldahl \cite{telemetrithesis} i 2009. Denne har ikke blitt endret mye på, men noen endringer måtte gjøres for at den skulle fungere sammen med brukergrensesnittet.
-Slik det var, så leverte telemetrimodulen GPS data kun til dashbordet i bilen og hastigheten til bilen ble aldri brukt. Dette er nå endret slik at telemetrimodulen sender disse dataene sammen med de andre måleverdiene som en kommaseparert string via GPRS til Pythonserveren.
+Telemetrimodulen ble laget av Anders Guldahl \cite{telemetrithesis} i 2009. Denne har ikke blitt endret mye på, men noen endringer og feilretting måtte gjøres for at den skulle fungere sammen med brukergrensesnittet.
+Slik det var, så ble ikke telemetrimodulens GPS del brukt til annet enn å stille klokka på dashbordet i bilen. Dette er nå endret slik at telemetrimodulen sender posisjon og hastighet sammen med de andre måleverdiene som en kommaseparert string via GPRS til Pythonserveren.
